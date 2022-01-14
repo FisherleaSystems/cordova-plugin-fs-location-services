@@ -21,11 +21,9 @@
 
 # Google Location Services for Cordova - Android
 
-This Cordova plugin provides information about the device's location, such as
-latitude and longitude and uses the [Google Play services location APIs](https://developers.google.com/android/reference/com/google/android/gms/location/package-summary).
+This Cordova plugin provides information about the device's location, such as latitude and longitude and uses the [Google Play services location APIs](https://developers.google.com/android/reference/com/google/android/gms/location/package-summary).
 
-This  plugin exists mainly because the [cordova geolocation plugin](https://www.npmjs.com/package/cordova-plugin-geolocation) does not use Android code anymore : https://issues.apache.org/jira/browse/CB-5977.
-It relies on the geolocation capability of the WebView.
+This plugin exists mainly because the [cordova geolocation plugin](https://www.npmjs.com/package/cordova-plugin-geolocation) does not use Android code anymore : https://issues.apache.org/jira/browse/CB-5977. It relies on the geolocation capability of the WebView.
 
 Depending on your particular needs, this plugin may be more suitable.
 
@@ -33,17 +31,13 @@ Depending on your particular needs, this plugin may be more suitable.
 
 [Add the Android Support and Google Repository](https://developer.android.com/tools/support-library/setup.html).
 
-The plugin is published on [npm](https://www.npmjs.com/package/cordova-plugin-locationservices):
+The plugin is published as a [GitHub package]https://github.com/orgs/FisherleaSystems/packages?repo_name=cordova-plugin-fs-location-services):
 
-    cordova plugin add cordova-plugin-locationservices
-
-If you use Cordova Android platform 4, check the `v1` branch.
-
-    cordova plugin add cordova-plugin-locationservices@legacy
+    cordova plugin add @fisherleasystems/cordova-plugin-fs-location-services
 
 ### Google play services version
 
-This plugin use the latest available Google Location services release.
+This plugin use version 16 of the Google Location services release. Version 17 includes some breaking changes.
 
 If you want to use a specific version, add a [build-extras.gradle](http://cordova.apache.org/docs/en/latest/guide/platforms/android/tools.html) file:
 
@@ -58,33 +52,34 @@ ext.postBuildExtras = {
   }
 }
 ```
+
 ### Tests
+
 The plugin use the [Cordova Plugin Test Framework](https://github.com/apache/cordova-plugin-test-framework) and tests based on the [Cordova Geolocation Plugin](https://www.npmjs.com/package/cordova-plugin-geolocation).
 
 Clone the [test app](https://github.com/louisbl/cordova-plugin-locationservices-tests) and run it on a device/emulator.
 
 ## Supported Platforms
 
-- Android
-
+-   Android
 
 ## Methods
 
-- cordova.plugins.locationServices.geolocation.getCurrentPosition
-- cordova.plugins.locationServices.geolocation.watchPosition
-- cordova.plugins.locationServices.geolocation.clearWatch
+-   cordova.plugins.locationServices.geolocation.getCurrentPosition
+-   cordova.plugins.locationServices.geolocation.watchPosition
+-   cordova.plugins.locationServices.geolocation.clearWatch
 
 ## Objects (Read-Only)
 
-- cordova.plugins.locationServices.Position
-- cordova.plugins.locationServices.PositionError
-- cordova.plugins.locationServices.Coordinates
-- cordova.plugins.locationServices.Priorities
+-   cordova.plugins.locationServices.Position
+-   cordova.plugins.locationServices.PositionError
+-   cordova.plugins.locationServices.Coordinates
+-   cordova.plugins.locationServices.Priorities
 
 ## LocationServices.getCurrentPosition
 
 Returns the device's current position to the `geolocationSuccess`
-callback with a `Position` object as the parameter.  If there is an
+callback with a `Position` object as the parameter. If there is an
 error, the `geolocationError` callback is passed a
 `PositionError` object.
 
@@ -94,12 +89,11 @@ error, the `geolocationError` callback is passed a
 
 ### Parameters
 
-- __geolocationSuccess__: The callback that is passed the current position.
+-   **geolocationSuccess**: The callback that is passed the current position.
 
-- __geolocationError__: _(Optional)_ The callback that executes if an error occurs.
+-   **geolocationError**: _(Optional)_ The callback that executes if an error occurs.
 
-- __geolocationOptions__: _(Optional)_ The geolocation options.
-
+-   **geolocationOptions**: _(Optional)_ The geolocation options.
 
 ### Example
 
@@ -131,7 +125,7 @@ error, the `geolocationError` callback is passed a
 
 Returns the device's current position when a change in position is detected.
 When the device retrieves a new location, the `geolocationSuccess`
-callback executes with a `Position` object as the parameter.  If
+callback executes with a `Position` object as the parameter. If
 there is an error, the `geolocationError` callback executes with a
 `PositionError` object as the parameter.
 
@@ -141,15 +135,15 @@ there is an error, the `geolocationError` callback executes with a
 
 ### Parameters
 
-- __geolocationSuccess__: The callback that is passed the current position.
+-   **geolocationSuccess**: The callback that is passed the current position.
 
-- __geolocationError__: (Optional) The callback that executes if an error occurs.
+-   **geolocationError**: (Optional) The callback that executes if an error occurs.
 
-- __geolocationOptions__: (Optional) The geolocation options.
+-   **geolocationOptions**: (Optional) The geolocation options.
 
 ### Returns
 
-- __String__: returns a watch id that references the watch position interval. The watch id should be used with `cordova.plugins.locationServices.geolocation.clearWatch` to stop watching for changes in position.
+-   **String**: returns a watch id that references the watch position interval. The watch id should be used with `cordova.plugins.locationServices.geolocation.clearWatch` to stop watching for changes in position.
 
 ### Example
 
@@ -178,7 +172,6 @@ there is an error, the `geolocationError` callback executes with a
       priority: cordova.plugins.locationServices.geolocation.priorities.PRIORITY_HIGH_ACCURACY
     });
 
-
 ## geolocationOptions
 
 Optional parameters to customize the retrieval of the geolocation
@@ -195,35 +188,35 @@ Optional parameters to customize the retrieval of the geolocation
 
 ### Options
 
-- __enableHighAccuracy__: Provides a hint that the application needs the best possible results. It will force the plugin to check if the GPS is enabled before any action. _(Boolean)_
+-   **enableHighAccuracy**: Provides a hint that the application needs the best possible results. It will force the plugin to check if the GPS is enabled before any action. _(Boolean)_
 
-- __timeout__: The maximum length of time (milliseconds) that is allowed to pass from the call to `cordova.plugins.locationServices.geolocation.getCurrentPosition` or `cordova.plugins.locationServices.geolocation.watchPosition` until the corresponding `geolocationSuccess` callback executes. If the `geolocationSuccess` callback is not invoked within this time, the `geolocationError` callback is passed a `PositionError.TIMEOUT` error code. (Note that when used in conjunction with `cordova.plugins.locationServices.geolocation.watchPosition`, the `geolocationError` callback could be called on an interval every `timeout` milliseconds!) _(Number)_
+-   **timeout**: The maximum length of time (milliseconds) that is allowed to pass from the call to `cordova.plugins.locationServices.geolocation.getCurrentPosition` or `cordova.plugins.locationServices.geolocation.watchPosition` until the corresponding `geolocationSuccess` callback executes. If the `geolocationSuccess` callback is not invoked within this time, the `geolocationError` callback is passed a `PositionError.TIMEOUT` error code. (Note that when used in conjunction with `cordova.plugins.locationServices.geolocation.watchPosition`, the `geolocationError` callback could be called on an interval every `timeout` milliseconds!) _(Number)_
 
-- __maximumAge__: Accept a cached position whose age is no greater than the specified time in milliseconds. _(Number)_
+-   **maximumAge**: Accept a cached position whose age is no greater than the specified time in milliseconds. _(Number)_
 
-- __priority__: The priority of the request is a strong hint for which location sources to use. For example, PRIORITY_HIGH_ACCURACY is more likely to use GPS, and PRIORITY_BALANCED_POWER_ACCURACY is more likely to use WIFI & Cell tower positioning, but it also depends on many other factors (such as which sources are available) and is implementation dependent.  _(Number)_
+-   **priority**: The priority of the request is a strong hint for which location sources to use. For example, PRIORITY*HIGH_ACCURACY is more likely to use GPS, and PRIORITY_BALANCED_POWER_ACCURACY is more likely to use WIFI & Cell tower positioning, but it also depends on many other factors (such as which sources are available) and is implementation dependent. *(Number)\_
 
-- __interval__: Set the desired interval for active location updates, in milliseconds.
+-   **interval**: Set the desired interval for active location updates, in milliseconds.
 
     The location client will actively try to obtain location updates for your application at this interval, so it has a direct influence on the amount of power used by your application. Choose your interval wisely.
 
-    This interval is inexact. You may not receive updates at all (if no location sources are available), or you may receive them slower than requested. You may also receive them faster than requested (if other applications are requesting location at a faster interval). The fastest rate that that you will receive updates can be controlled with __fastInterval__. By default this fastest rate is 6x the interval frequency.
+    This interval is inexact. You may not receive updates at all (if no location sources are available), or you may receive them slower than requested. You may also receive them faster than requested (if other applications are requesting location at a faster interval). The fastest rate that that you will receive updates can be controlled with **fastInterval**. By default this fastest rate is 6x the interval frequency.
 
     Applications with only the coarse location permission may have their interval silently throttled.
 
     An interval of 0 is allowed, but not recommended, since location updates may be extremely fast on future implementations. _(Number)_
 
-- __fastInterval__: Explicitly set the fastest interval for location updates, in milliseconds.
+-   **fastInterval**: Explicitly set the fastest interval for location updates, in milliseconds.
 
-    This controls the fastest rate at which your application will receive location updates, which might be faster than __interval__ in some situations (for example, if other applications are triggering location updates).
+    This controls the fastest rate at which your application will receive location updates, which might be faster than **interval** in some situations (for example, if other applications are triggering location updates).
 
     This allows your application to passively acquire locations at a rate faster than it actively acquires locations, saving power.
 
-    Unlike __interval__, this parameter is exact. Your application will never receive updates faster than this value.
+    Unlike **interval**, this parameter is exact. Your application will never receive updates faster than this value.
 
-    If you don't call this method, a fastest interval will be selected for you. It will be a value faster than your active interval (__interval__).
+    If you don't call this method, a fastest interval will be selected for you. It will be a value faster than your active interval (**interval**).
 
-    An interval of 0 is allowed, but not recommended, since location updates may be extremely fast on future implementations.  _(Number)_
+    An interval of 0 is allowed, but not recommended, since location updates may be extremely fast on future implementations. _(Number)_
 
 ## LocationServices.clearWatch
 
@@ -234,7 +227,7 @@ Stop watching for changes to the device's location referenced by the
 
 ### Parameters
 
-- __watchID__: The id of the `watchPosition` interval to clear. (String)
+-   **watchID**: The id of the `watchPosition` interval to clear. (String)
 
 ### Example
 
@@ -253,9 +246,9 @@ Contains `cordova.plugins.locationServices.Position` coordinates and timestamp, 
 
 ### Properties
 
-- __coords__: A set of geographic coordinates. _(Coordinates)_
+-   **coords**: A set of geographic coordinates. _(Coordinates)_
 
-- __timestamp__: Creation timestamp for `coords`. _(DOMTimeStamp)_
+-   **timestamp**: Creation timestamp for `coords`. _(DOMTimeStamp)_
 
 ## Coordinates
 
@@ -265,23 +258,23 @@ It contains a set of properties that describe the geographic coordinates of a po
 
 ### Properties
 
-* __latitude__: Latitude in decimal degrees. _(Number)_
+-   **latitude**: Latitude in decimal degrees. _(Number)_
 
-* __longitude__: Longitude in decimal degrees. _(Number)_
+-   **longitude**: Longitude in decimal degrees. _(Number)_
 
-* __altitude__: Height of the position in meters above the ellipsoid. _(Number)_
+-   **altitude**: Height of the position in meters above the ellipsoid. _(Number)_
 
-* __accuracy__: Accuracy level of the latitude and longitude coordinates in meters. _(Number)_
+-   **accuracy**: Accuracy level of the latitude and longitude coordinates in meters. _(Number)_
 
-* __altitudeAccuracy__: Accuracy level of the altitude coordinate in meters. _(Number)_
+-   **altitudeAccuracy**: Accuracy level of the altitude coordinate in meters. _(Number)_
 
-* __heading__: Direction of travel, specified in degrees counting clockwise relative to the true north. _(Number)_
+-   **heading**: Direction of travel, specified in degrees counting clockwise relative to the true north. _(Number)_
 
-* __speed__: Current ground speed of the device, specified in meters per second. _(Number)_
+-   **speed**: Current ground speed of the device, specified in meters per second. _(Number)_
 
 ### Android Quirks
 
-__altitudeAccuracy__: Not supported by Android devices, returning `null`.
+**altitudeAccuracy**: Not supported by Android devices, returning `null`.
 
 ## PositionError
 
@@ -290,26 +283,26 @@ callback function when an error occurs with LocationServices.
 
 ### Properties
 
-- __code__: One of the predefined error codes listed below.
+-   **code**: One of the predefined error codes listed below.
 
-- __message__: Error message describing the details of the error encountered.
+-   **message**: Error message describing the details of the error encountered.
 
 ### Constants
 
-- `cordova.plugins.locationServices.PositionError.PERMISSION_DENIED`
-  - Returned when users do not allow the app to retrieve position information. This is dependent on the platform.
-- `cordova.plugins.locationServices.PositionError.POSITION_UNAVAILABLE`
-  - Returned when the device is unable to retrieve a position. In general, this means the device is not connected to a network or can't get a satellite fix.
-- `cordova.plugins.locationServices.PositionError.TIMEOUT`
-  - Returned when the device is unable to retrieve a position within the time specified by the `timeout` included in `geolocationOptions`. When used with `cordova.plugins.locationServices.geolocation.watchPosition`, this error could be repeatedly passed to the `geolocationError` callback every `timeout` milliseconds.
+-   `cordova.plugins.locationServices.PositionError.PERMISSION_DENIED`
+    -   Returned when users do not allow the app to retrieve position information. This is dependent on the platform.
+-   `cordova.plugins.locationServices.PositionError.POSITION_UNAVAILABLE`
+    -   Returned when the device is unable to retrieve a position. In general, this means the device is not connected to a network or can't get a satellite fix.
+-   `cordova.plugins.locationServices.PositionError.TIMEOUT`
+    -   Returned when the device is unable to retrieve a position within the time specified by the `timeout` included in `geolocationOptions`. When used with `cordova.plugins.locationServices.geolocation.watchPosition`, this error could be repeatedly passed to the `geolocationError` callback every `timeout` milliseconds.
 
 ## Priorities
 
-This object holds the constants to use with __priority__ options.
+This object holds the constants to use with **priority** options.
 
 ### Constants
 
-- cordova.plugins.locationServices.geolocation.priorities.PRIORITY_HIGH_ACCURACY
-- cordova.plugins.locationServices.geolocation.priorities.PRIORITY_BALANCED_POWER_ACCURACY
-- cordova.plugins.locationServices.geolocation.priorities.PRIORITY_LOW_POWER
-- cordova.plugins.locationServices.geolocation.priorities.PRIORITY_NO_POWER
+-   cordova.plugins.locationServices.geolocation.priorities.PRIORITY_HIGH_ACCURACY
+-   cordova.plugins.locationServices.geolocation.priorities.PRIORITY_BALANCED_POWER_ACCURACY
+-   cordova.plugins.locationServices.geolocation.priorities.PRIORITY_LOW_POWER
+-   cordova.plugins.locationServices.geolocation.priorities.PRIORITY_NO_POWER

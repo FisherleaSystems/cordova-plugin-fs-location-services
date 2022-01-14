@@ -1,16 +1,16 @@
 {
-  "name": "cordova-plugin-locationservices",
+  "name": "@fisherleasystems/cordova-plugin-fs-location-services",
   "version": "2.1.1",
   "description": "Android geolocation plugin using Google Play Services Location API.",
   "cordova": {
-    "id": "cordova-plugin-locationservices",
+    "id": "cordova-plugin-fs-location-services",
     "platforms": [
       "android"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/louisbl/cordova-plugin-locationservices"
+    "url": "https://github.com/FisherleaSystems/cordova-plugin-fs-location-services.git"
   },
   "keywords": [
     "cordova",
@@ -20,5 +20,22 @@
     "cordova-android"
   ],
   "author": "louisbl",
+    "contributors": [
+    "Wayne Fisher <wayne@fisherlea.com>"
+  ],
+  "bugs": {
+    "url": "https://github.com/FisherleaSystems/cordova-plugin-fs-location-services/issues"
+  },
+  "dependencies": {},
+  "deprecated": false,
+  "maintainers": [
+    {
+      "name": "Wayne Fisher",
+      "email": "wayne@fisherlea.com"
+    }
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/FisherleaSystems"
+  },
   "license": "Apache 2.0"
 }
