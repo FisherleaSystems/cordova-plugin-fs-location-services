@@ -16,7 +16,7 @@
        specific language governing permissions and limitations
        under the License.
  */
-package fr.louisbl.cordova.locationservices;
+package com.fisherlea.cordova.locationservices;
 
 import android.Manifest;
 import android.content.Context;
@@ -40,15 +40,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CordovaLocationServices extends CordovaPlugin implements
-        GoogleApiClient.ConnectionCallbacks {
+public class CordovaLocationServices extends CordovaPlugin implements GoogleApiClient.ConnectionCallbacks {
 
     private static final int LOCATION_PERMISSION_REQUEST = 0;
 
     private CordovaLocationListener mListener;
     private boolean mWantLastLocation = false;
     private boolean mWantUpdates = false;
-    private String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
+    private String[] permissions = { Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION };
     private JSONArray mPrevArgs;
     private CallbackContext mCbContext;
     private GApiUtils mGApiUtils;
@@ -57,9 +57,8 @@ public class CordovaLocationServices extends CordovaPlugin implements
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-        mGApiClient = new GoogleApiClient.Builder(cordova.getActivity())
-                .addApi(LocationServices.API).addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(getGApiUtils()).build();
+        mGApiClient = new GoogleApiClient.Builder(cordova.getActivity()).addApi(LocationServices.API)
+                .addConnectionCallbacks(this).addOnConnectionFailedListener(getGApiUtils()).build();
     }
 
     @Override
@@ -83,7 +82,8 @@ public class CordovaLocationServices extends CordovaPlugin implements
     }
 
     @Override
-    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) throws JSONException {
+    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults)
+            throws JSONException {
         PluginResult result;
 
         for (int r : grantResults) {
@@ -120,8 +120,7 @@ public class CordovaLocationServices extends CordovaPlugin implements
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.i(LocationUtils.APPTAG,
-                "GoogleApiClient connection has been suspend");
+        Log.i(LocationUtils.APPTAG, "GoogleApiClient connection has been suspend");
     }
 
     /**
@@ -132,8 +131,7 @@ public class CordovaLocationServices extends CordovaPlugin implements
      * @param callbackContext The callback id used when calling back into JavaScript.
      * @return True if the action was valid, or false if not.
      */
-    public boolean execute(final String action, final JSONArray args,
-                           final CallbackContext callbackContext) {
+    public boolean execute(final String action, final JSONArray args, final CallbackContext callbackContext) {
 
         if (action == null || !action.matches("getPermission|getLocation|addWatch|clearWatch")) {
             return false;
@@ -153,7 +151,6 @@ public class CordovaLocationServices extends CordovaPlugin implements
             return true;
         }
 
-
         final String id = args.optString(0, "");
         final boolean highAccuracy = args.optBoolean(1, false);
         final int priority = args.optInt(2, LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -166,14 +163,12 @@ public class CordovaLocationServices extends CordovaPlugin implements
         }
 
         if (highAccuracy && isGPSdisabled()) {
-            fail(CordovaLocationListener.POSITION_UNAVAILABLE,
-                    "GPS is disabled on this device.", callbackContext,
+            fail(CordovaLocationListener.POSITION_UNAVAILABLE, "GPS is disabled on this device.", callbackContext,
                     false);
         }
 
         if (getGApiUtils().servicesConnected()) {
-            if (!mGApiClient.isConnected()
-                    && !mGApiClient.isConnecting()) {
+            if (!mGApiClient.isConnected() && !mGApiClient.isConnecting()) {
                 mGApiClient.connect();
             }
             if (action.equals("getLocation")) {
@@ -183,14 +178,12 @@ public class CordovaLocationServices extends CordovaPlugin implements
                     setWantLastLocation(args, callbackContext);
                 }
             } else if (action.equals("addWatch")) {
-                getListener().setLocationRequestParams(priority,
-                        interval, fastInterval);
+                getListener().setLocationRequestParams(priority, interval, fastInterval);
                 mWantUpdates = true;
                 addWatch(id, callbackContext);
             }
         } else {
-            fail(CordovaLocationListener.POSITION_UNAVAILABLE,
-                    "Google Play Services is not available on this device.",
+            fail(CordovaLocationListener.POSITION_UNAVAILABLE, "Google Play Services is not available on this device.",
                     callbackContext, false);
         }
 
@@ -225,9 +218,7 @@ public class CordovaLocationServices extends CordovaPlugin implements
             o.put("longitude", loc.getLongitude());
             o.put("altitude", (loc.hasAltitude() ? loc.getAltitude() : null));
             o.put("accuracy", loc.getAccuracy());
-            o.put("heading",
-                    (loc.hasBearing() ? (loc.hasSpeed() ? loc.getBearing()
-                            : null) : null));
+            o.put("heading", (loc.hasBearing() ? (loc.hasSpeed() ? loc.getBearing() : null) : null));
             o.put("velocity", loc.getSpeed());
             o.put("timestamp", loc.getTime());
         } catch (JSONException e) {
@@ -237,10 +228,8 @@ public class CordovaLocationServices extends CordovaPlugin implements
         return o;
     }
 
-    public void win(Location loc, CallbackContext callbackContext,
-                    boolean keepCallback) {
-        PluginResult result = new PluginResult(PluginResult.Status.OK,
-                this.returnLocationJSON(loc));
+    public void win(Location loc, CallbackContext callbackContext, boolean keepCallback) {
+        PluginResult result = new PluginResult(PluginResult.Status.OK, this.returnLocationJSON(loc));
         result.setKeepCallback(keepCallback);
         callbackContext.sendPluginResult(result);
     }
@@ -251,8 +240,7 @@ public class CordovaLocationServices extends CordovaPlugin implements
      * @param code The error code
      * @param msg  The error message
      */
-    public void fail(int code, String msg, CallbackContext callbackContext,
-                     boolean keepCallback) {
+    public void fail(int code, String msg, CallbackContext callbackContext, boolean keepCallback) {
         JSONObject obj = new JSONObject();
         String backup = null;
         try {
@@ -260,8 +248,7 @@ public class CordovaLocationServices extends CordovaPlugin implements
             obj.put("message", msg);
         } catch (JSONException e) {
             obj = null;
-            backup = "{'code':" + code + ",'message':'"
-                    + msg.replaceAll("'", "\'") + "'}";
+            backup = "{'code':" + code + ",'message':'" + msg.replaceAll("'", "\'") + "'}";
         }
         PluginResult result;
         if (obj != null) {
@@ -276,8 +263,7 @@ public class CordovaLocationServices extends CordovaPlugin implements
 
     private boolean isGPSdisabled() {
         boolean gps_enabled;
-        LocationManager lm = (LocationManager) this.cordova.getActivity().getSystemService(
-                Context.LOCATION_SERVICE);
+        LocationManager lm = (LocationManager) this.cordova.getActivity().getSystemService(Context.LOCATION_SERVICE);
         try {
             gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
         } catch (Exception ex) {
@@ -302,22 +288,18 @@ public class CordovaLocationServices extends CordovaPlugin implements
             e.printStackTrace();
             maximumAge = 0;
         }
-        Location last = LocationServices.FusedLocationApi
-                .getLastLocation(mGApiClient);
+        Location last = LocationServices.FusedLocationApi.getLastLocation(mGApiClient);
         // Check if we can use lastKnownLocation to get a quick reading and use
         // less battery
-        if (last != null
-                && (System.currentTimeMillis() - last.getTime()) <= maximumAge) {
-            PluginResult result = new PluginResult(PluginResult.Status.OK,
-                    returnLocationJSON(last));
+        if (last != null && (System.currentTimeMillis() - last.getTime()) <= maximumAge) {
+            PluginResult result = new PluginResult(PluginResult.Status.OK, returnLocationJSON(last));
             callbackContext.sendPluginResult(result);
         } else {
             getCurrentLocation(callbackContext, Integer.MAX_VALUE);
         }
     }
 
-    private void setWantLastLocation(JSONArray args,
-                                     CallbackContext callbackContext) {
+    private void setWantLastLocation(JSONArray args, CallbackContext callbackContext) {
         mPrevArgs = args;
         mCbContext = callbackContext;
         mWantLastLocation = true;
@@ -337,8 +319,7 @@ public class CordovaLocationServices extends CordovaPlugin implements
 
     private CordovaLocationListener getListener() {
         if (mListener == null) {
-            mListener = new CordovaLocationListener(mGApiClient, this,
-                    LocationUtils.APPTAG);
+            mListener = new CordovaLocationListener(mGApiClient, this, LocationUtils.APPTAG);
         }
         return mListener;
     }

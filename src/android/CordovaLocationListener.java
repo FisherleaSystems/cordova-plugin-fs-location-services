@@ -16,7 +16,7 @@
        specific language governing permissions and limitations
        under the License.
  */
-package fr.louisbl.cordova.locationservices;
+package com.fisherlea.cordova.locationservices;
 
 import android.location.Location;
 import android.util.Log;
@@ -49,18 +49,15 @@ public class CordovaLocationListener implements LocationListener {
     private Timer mTimer = null;
     private String TAG;
 
-    public CordovaLocationListener(GoogleApiClient client,
-                                   CordovaLocationServices broker, String tag) {
+    public CordovaLocationListener(GoogleApiClient client, CordovaLocationServices broker, String tag) {
         // Create a new global location parameters object
         mLocationRequest = LocationRequest.create();
         // Set the average interval to 6 seconds
-        mLocationRequest
-                .setInterval(LocationUtils.UPDATE_INTERVAL_IN_MILLISECONDS);
+        mLocationRequest.setInterval(LocationUtils.UPDATE_INTERVAL_IN_MILLISECONDS);
         // Use high accuracy
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         // Set the interval ceiling to 1 second
-        mLocationRequest
-                .setFastestInterval(LocationUtils.FAST_INTERVAL_CEILING_IN_MILLISECONDS);
+        mLocationRequest.setFastestInterval(LocationUtils.FAST_INTERVAL_CEILING_IN_MILLISECONDS);
 
         mGApiClient = client;
         mOwner = broker;
@@ -78,8 +75,7 @@ public class CordovaLocationListener implements LocationListener {
         win(location);
     }
 
-    public void setLocationRequestParams(int priority, long interval,
-                                         long fastInterval) {
+    public void setLocationRequestParams(int priority, long interval, long fastInterval) {
         mLocationRequest.setPriority(priority);
         mLocationRequest.setInterval(interval);
         mLocationRequest.setFastestInterval(fastInterval);
@@ -164,8 +160,7 @@ public class CordovaLocationListener implements LocationListener {
         if (mGApiClient != null && mGApiClient.isConnected()) {
             if (!mIsRunning) {
                 mIsRunning = true;
-                LocationServices.FusedLocationApi.requestLocationUpdates(
-                        mGApiClient, mLocationRequest, this);
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGApiClient, mLocationRequest, this);
             }
         }
     }
@@ -178,8 +173,7 @@ public class CordovaLocationListener implements LocationListener {
 
         if (mIsRunning) {
             if (mGApiClient != null && mGApiClient.isConnected()) {
-                LocationServices.FusedLocationApi.removeLocationUpdates(
-                        mGApiClient, this);
+                LocationServices.FusedLocationApi.removeLocationUpdates(mGApiClient, this);
             }
             mIsRunning = false;
         }
@@ -198,8 +192,7 @@ public class CordovaLocationListener implements LocationListener {
         private CallbackContext mCallbackContext = null;
         private CordovaLocationListener mListener = null;
 
-        public LocationTimeoutTask(CallbackContext callbackContext,
-                                   CordovaLocationListener listener) {
+        public LocationTimeoutTask(CallbackContext callbackContext, CordovaLocationListener listener) {
             mCallbackContext = callbackContext;
             mListener = listener;
         }

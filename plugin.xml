@@ -21,7 +21,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 xmlns:android="http://schemas.android.com/apk/res/android"
            id="cordova-plugin-fs-location-services"
-      version="2.2.0">
+      version="2.2.1">
 
     <name>Google Location Services for Cordova - Android</name>
     <description>Android geolocation plugin using Google Play Services Location API.</description>
@@ -60,7 +60,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="LocationServices">
-                <param name="android-package" value="fr.louisbl.cordova.locationservices.CordovaLocationServices"/>
+                <param name="android-package" value="com.fisherlea.cordova.locationservices.CordovaLocationServices"/>
             </feature>
         </config-file>
 
@@ -70,11 +70,11 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
         </config-file>
 
-        <source-file src="src/android/CordovaLocationListener.java" target-dir="src/fr/louisbl/cordova/locationservices" />
-        <source-file src="src/android/CordovaLocationServices.java" target-dir="src/fr/louisbl/cordova/locationservices" />
-        <source-file src="src/android/ErrorDialogFragment.java" target-dir="src/fr/louisbl/cordova/locationservices" />
-        <source-file src="src/android/GApiUtils.java" target-dir="src/fr/louisbl/cordova/locationservices" />
-        <source-file src="src/android/LocationUtils.java" target-dir="src/fr/louisbl/cordova/locationservices" />
+        <source-file src="src/android/CordovaLocationListener.java" target-dir="src/com/fisherlea/cordova/locationservices" />
+        <source-file src="src/android/CordovaLocationServices.java" target-dir="src/com/fisherlea/cordova/locationservices" />
+        <source-file src="src/android/ErrorDialogFragment.java" target-dir="src/com/fisherlea/cordova/locationservices" />
+        <source-file src="src/android/GApiUtils.java" target-dir="src/com/fisherlea/cordova/locationservices" />
+        <source-file src="src/android/LocationUtils.java" target-dir="src/com/fisherlea/cordova/locationservices" />
 
     </platform>
 </plugin>

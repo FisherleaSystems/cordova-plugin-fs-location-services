@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package fr.louisbl.cordova.locationservices;
+package com.fisherlea.cordova.locationservices;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 
 /**
- * Define a DialogFragment to display the error dialog generated in
- * showErrorDialog.
+ * Define a DialogFragment to display the error dialog generated in showErrorDialog.
  */
 public class ErrorDialogFragment extends DialogFragment {
 

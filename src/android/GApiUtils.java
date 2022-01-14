@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package fr.louisbl.cordova.locationservices;
+package com.fisherlea.cordova.locationservices;
 
 import android.app.Dialog;
 import android.content.IntentSender;
@@ -40,15 +40,13 @@ public class GApiUtils implements GoogleApiClient.OnConnectionFailedListener {
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         /*
-         * Google Play services can resolve some errors it detects. If the error
-		 * has a resolution, try sending an Intent to start a Google Play
-		 * services activity that can resolve error.
-		 */
+         * Google Play services can resolve some errors it detects. If the error has a resolution, try sending an Intent to start a Google
+         * Play services activity that can resolve error.
+         */
         if (connectionResult.hasResolution()) {
             try {
                 // Start an Activity that tries to resolve the error
-                connectionResult.startResolutionForResult(
-                        mCordova.getActivity(),
+                connectionResult.startResolutionForResult(mCordova.getActivity(),
                         LocationUtils.CONNECTION_FAILURE_RESOLUTION_REQUEST);
             } catch (IntentSender.SendIntentException e) {
                 // Log the error
@@ -69,8 +67,7 @@ public class GApiUtils implements GoogleApiClient.OnConnectionFailedListener {
     public boolean servicesConnected() {
 
         // Check that Google Play services is available
-        int resultCode = GooglePlayServicesUtil
-                .isGooglePlayServicesAvailable(mCordova.getActivity());
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(mCordova.getActivity());
 
         // If Google Play services is available
         if (ConnectionResult.SUCCESS == resultCode) {
@@ -87,8 +84,7 @@ public class GApiUtils implements GoogleApiClient.OnConnectionFailedListener {
     }
 
     /**
-     * Show a dialog returned by Google Play services for the connection error
-     * code
+     * Show a dialog returned by Google Play services for the connection error code
      *
      * @param errorCode An error code returned from onConnectionFailed
      */
@@ -96,7 +92,8 @@ public class GApiUtils implements GoogleApiClient.OnConnectionFailedListener {
         mCordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 // Get the error dialog from Google Play services
-                Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(errorCode, mCordova.getActivity(), requestCode);
+                Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(errorCode, mCordova.getActivity(),
+                        requestCode);
 
                 // If Google Play services can provide an error dialog
                 if (errorDialog != null) {
@@ -108,8 +105,7 @@ public class GApiUtils implements GoogleApiClient.OnConnectionFailedListener {
                     errorFragment.setDialog(errorDialog);
 
                     // Show the error dialog in the DialogFragment
-                    errorFragment.show(mCordova.getActivity().getFragmentManager(),
-                            LocationUtils.APPTAG);
+                    errorFragment.show(mCordova.getActivity().getFragmentManager(), LocationUtils.APPTAG);
                 }
             }
         });
