@@ -1,6 +1,6 @@
 {
   "name": "@fisherleasystems/cordova-plugin-fs-location-services",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Android geolocation plugin using Google Play Services Location API.",
   "cordova": {
     "id": "cordova-plugin-fs-location-services",
@@ -20,7 +20,7 @@
     "cordova-android"
   ],
   "author": "louisbl",
-    "contributors": [
+  "contributors": [
     "Wayne Fisher <wayne@fisherlea.com>"
   ],
   "bugs": {
