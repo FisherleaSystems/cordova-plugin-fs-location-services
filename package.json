@@ -28,6 +28,7 @@
   },
   "dependencies": {},
   "deprecated": false,
+  "homepage": "https://github.com/FisherleaSystems/cordova-plugin-fs-location-services#readme",
   "maintainers": [
     {
       "name": "Wayne Fisher",
@@ -37,5 +38,8 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/FisherleaSystems"
   },
-  "license": "Apache 2.0"
+  "license": "Apache 2.0",
+  "scripts": {
+    "test": "echo \"No tests to run.\""
+  }
 }
