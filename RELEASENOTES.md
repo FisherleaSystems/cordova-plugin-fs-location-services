@@ -21,6 +21,14 @@
 
 # Release Notes
 
+### 2.2.2 (Feb 8, 2023)
+
+-   Add GitHub action to automatically publish releases to GitHub Packages.
+
+### 2.2.1 (Jan 14, 2022)
+
+-   Change the JAVA package name to use com.fisherlea prefix.
+
 ### 2.2.0 (Jan 14, 2022)
 
 -   Release as a Fisherlea Systems plugin.
